@@ -44,20 +44,19 @@ namespace SpotlightToBackgrounds
 					if (backgroundHashes.ContainsKey(hash))
 						continue;
 
-					using (var img = Image.FromFile(file))
-					{					
-						// Only HD images
-						if (img.Width < 1920 || img.Height < 1080)
-							continue;
+					var img = Image.FromFile(file);
+					
+					// Only HD images
+					if (img.Width < 1920 || img.Height < 1080)
+						continue;
 
-						// Only Horizontal Aspect
-						var aspect = (double)img.Width / img.Height;
-						if (aspect != (double)16/9)
-							continue;
+					// Only Horizontal Aspect
+					var aspect = (double)img.Width / img.Height;
+					if (aspect != (double)16/9)
+						continue;
 
-						var backgroundFilepath = Path.Combine(backgroundFolder, Path.GetFileName(file) + ".png");
-						File.Copy(file, backgroundFilepath);
-					}
+					var backgroundFilepath = Path.Combine(backgroundFolder, Path.GetFileName(file) + ".png");
+					File.Copy(file, backgroundFilepath);
 				}
 			}
 		}
